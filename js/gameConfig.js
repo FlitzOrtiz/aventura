@@ -127,7 +127,7 @@ const scenesConfig = [
       {
         speaker: "Lía la Luciérnaga",
         adolorido: true,
-        text: "Juan parece triste. ¿Cómo crees que se siente?",
+        text: "Juan no parece estar bien. ¿Cómo crees que se siente Juan después de lastimarse la rodilla?",
         audio: resources.audios.lia_pregunta2,
         options: [
           {
