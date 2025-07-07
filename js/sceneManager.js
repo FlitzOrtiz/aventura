@@ -2,6 +2,7 @@ class SceneManager {
   constructor() {
     this.currentScene = null;
     this.justRestarted = false;
+    this.currentAudio = null; // Referencia al audio actual
   }
 
   loadScene(sceneIndex) {
@@ -106,8 +107,12 @@ class SceneManager {
       uiManager.hideOptions();
     }
 
-    // Reproducir audio
-    audioManager.play(dialog.audio);
+    // Detener audio anterior antes de reproducir el nuevo
+    if (this.currentAudio && typeof this.currentAudio.pause === "function") {
+      this.currentAudio.pause();
+      this.currentAudio.currentTime = 0;
+    }
+    this.currentAudio = audioManager.play(dialog.audio);
   }
 
   nextDialog() {
@@ -141,9 +146,9 @@ class SceneManager {
     uiManager.elements.speakerName.textContent = "Lía la Luciérnaga";
     uiManager.elements.dialogText.innerHTML = `
         <div style="text-align: center; padding: 20px;">
-          <img src="${resources.backgrounds.end}" alt="Escenario final" style="max-width: 100%; border-radius: 18px; margin-bottom: 24px; box-shadow: 0 4px 18px rgba(0,0,0,0.15);">
+          <img src="${resources.backgrounds.end}" alt="Escenario final" style="max-width: 70vh; border-radius: 18px; margin-bottom: 24px; box-shadow: 0 4px 18px rgba(0,0,0,0.15);">
           <h2 style="color: #ff6b9c; margin-bottom: 20px; font-size: 32px;">¡Felicidades ${gameConfig.userName}!</h2>
-          <p style="font-size: 24px; line-height: 1.6; color: #5a5a5a;">
+          <p style="font-size: 18px; line-height: 1.6; color: #5a5a5a;">
             Hoy aprendimos a ayudar, preguntar cómo se siente alguien, 
             dar las gracias y conversar. ¡Eres un gran amigo/a!
           </p>
@@ -175,16 +180,19 @@ class SceneManager {
     uiManager.disableOptions();
     uiManager.highlightOption(option);
 
-    // Reproducir feedback de audio
+    // Detener audio anterior antes de reproducir el nuevo
+    if (this.currentAudio && typeof this.currentAudio.pause === "function") {
+      this.currentAudio.pause();
+      this.currentAudio.currentTime = 0;
+    }
     if (option.correct) {
-      audioManager.play(resources.audios.correct);
+      this.currentAudio = audioManager.play(resources.audios.correct);
       gameConfig.points += 1;
-      actualizarPuntuacion(); // Llama a la función para actualizar la vista
+      actualizarPuntuacion();
     } else {
-      audioManager.play(resources.audios.incorrect);
+      this.currentAudio = audioManager.play(resources.audios.incorrect);
     }
 
-    // Avanzar después de un retraso
     setTimeout(() => {
       this.nextDialog();
     }, 1500);

@@ -95,7 +95,29 @@ class UIManager {
     options.forEach((option, index) => {
       const button = document.createElement("button");
       button.className = "option-btn";
-      button.textContent = option.text;
+      // Crear contenedor para imagen + texto
+      const content = document.createElement("span");
+      content.style.display = "flex";
+      content.style.alignItems = "center";
+      // Si hay imagen, agregarla
+      if (option.img) {
+        const img = document.createElement("img");
+        img.src = option.img;
+        img.alt = "";
+        img.width = 30;
+        img.height = 30;
+        img.style.width = "30px";
+        img.style.height = "30px";
+        img.style.marginRight = "10px";
+        content.appendChild(img);
+      }
+      // Texto de la opción
+      const textNode = document.createElement("span");
+      textNode.textContent = option.text;
+      content.appendChild(textNode);
+
+      button.appendChild(content);
+
       button.addEventListener("click", () => {
         sceneManager.selectOption(option);
       });
