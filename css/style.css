@@ -140,6 +140,16 @@ body {
   color: #ff6b9c;
 }
 
+.option-icon {
+  width: 60px;
+  height: 60px;
+  margin-right: 16px;
+  border-radius: 25%;
+  object-fit: cover;
+  object-position: top; /* Muestra la parte de arriba si se corta */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 .speaker-name {
   font-size: 18px;
   font-weight: bold;
