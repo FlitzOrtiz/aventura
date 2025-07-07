@@ -99,21 +99,26 @@ class UIManager {
       const content = document.createElement("span");
       content.style.display = "flex";
       content.style.alignItems = "center";
-      // Si hay imagen, agregarla
+      // Si hay imagen, agregarla (más grande y con borde curvo)
       if (option.img) {
         const img = document.createElement("img");
         img.src = option.img;
         img.alt = "";
-        img.width = 30;
-        img.height = 30;
-        img.style.width = "30px";
-        img.style.height = "30px";
-        img.style.marginRight = "10px";
+        img.width = 60;
+        img.height = 60;
+        img.style.width = "60px";
+        img.style.height = "60px";
+        img.style.marginRight = "16px";
+        img.style.borderRadius = "25%";
+        img.style.objectFit = "cover";
+        img.style.objectPosition = "top"; // Muestra la parte de arriba si se corta
+        img.style.boxShadow = "0 2px 8px rgba(0,0,0,0.10)";
         content.appendChild(img);
       }
       // Texto de la opción
       const textNode = document.createElement("span");
       textNode.textContent = option.text;
+      textNode.style.fontSize = "1.25rem";
       content.appendChild(textNode);
 
       button.appendChild(content);
@@ -123,6 +128,12 @@ class UIManager {
       });
       this.elements.optionsContainer.appendChild(button);
     });
+
+    // Mover los personajes más abajo (ajusta el margen superior del contenedor de personajes)
+    const chars = document.querySelector(".characters-container");
+    if (chars) {
+      chars.style.marginTop = "120px";
+    }
   }
 
   hideOptions() {
