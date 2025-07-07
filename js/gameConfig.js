@@ -7,6 +7,8 @@ const resources = {
     end: "assets/img/backgrounds/sunset.png",
   },
 
+  //actu
+
   // Rutas de audios
   audios: {
     narrador_escena1: "assets/audio/narrador_escena1.mp3",
