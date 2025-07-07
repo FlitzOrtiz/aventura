@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aventura con Juan - Historia Interactiva</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="game-container">
+      <!-- Pantalla de portada y permisos -->
+      <div
+        class="intro-screen"
+        id="intro-screen"
+        style="
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, #a8d8ff, #ffd6e7);
+          z-index: 100;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <div
+          style="
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 36px 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            max-width: 370px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          "
+        >
+          <img
+            src="./assets/img/characters/avatar_lia.png"
+            alt="Lía portada"
+            style="
+              width: 120px;
+              height: 120px;
+              object-fit: cover;
+              border-radius: 50%;
+              margin-bottom: 18px;
+              border: 4px solid #ffb6d5;
+            "
+          />
+          <h2
+            style="
+              color: #ff6b9c;
+              font-size: 2rem;
+              margin-bottom: 10px;
+              text-align: center;
+            "
+          >
+            ¡Bienvenido!
+          </h2>
+          <p
+            style="
+              font-size: 1.1rem;
+              color: #4a7ba6;
+              margin-bottom: 18px;
+              text-align: center;
+            "
+          >
+            Antes de jugar, ingresa tu nombre y pide permiso a tus padres o
+            tutores para usar este juego.
+          </p>
+          <form
+            id="intro-form"
+            style="
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+            "
+          >
+            <input
+              id="input-name"
+              type="text"
+              placeholder="Tu nombre"
+              required
+              style="
+                padding: 10px 16px;
+                border-radius: 18px;
+                border: 2px solid #a8d8ff;
+                font-size: 1rem;
+                outline: none;
+              "
+            />
+            <select
+              id="input-gender"
+              style="
+                padding: 10px 16px;
+                border-radius: 18px;
+                border: 2px solid #a8d8ff;
+                font-size: 1rem;
+                outline: none;
+                margin-bottom: 4px;
+              "
+            >
+              <option value="0">No especificar</option>
+              <option value="1">Masculino</option>
+              <option value="2">Femenino</option>
+            </select>
+            <label
+              style="
+                font-size: 0.98rem;
+                color: #555;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+              "
+            >
+              <input
+                id="parent-permission"
+                type="checkbox"
+                required
+                style="accent-color: #ff6b9c"
+              />
+              Tengo permiso de mis padres/tutores para jugar.
+            </label>
+            <button
+              type="submit"
+              style="
+                margin-top: 10px;
+                background: #ff6b9c;
+                color: white;
+                border: none;
+                border-radius: 22px;
+                padding: 12px 0;
+                font-size: 1.1rem;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                transition: background 0.2s;
+              "
+            >
+              ¡Jugar!
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Pantalla de inicio -->
+      <div class="start-screen" id="start-screen">
+        <h1 class="start-title">Aventura en el Parque</h1>
+        <div class="character-preview">
+          <div class="preview-character" id="preview-user-character">
+            <img id="preview-user" alt="User" />
+            <div class="preview-name" id="preview-user-name"></div>
+          </div>
+          <div class="preview-character">
+            <img id="preview-juan" alt="Juan" />
+            <div class="preview-name">Juan</div>
+          </div>
+          <div class="preview-character">
+            <img id="preview-lia" alt="Lía" />
+            <div class="preview-name">Lía</div>
+          </div>
+        </div>
+        <p id="start-message">
+          ¡Acompaña a Juan en su aventura en el parque y aprende sobre amistad y
+          ayuda!
+        </p>
+        <button class="start-button" id="start-button">
+          <i class="fas fa-play"></i> Comenzar Aventura
+        </button>
+      </div>
+
+      <!-- Fondo de la escena -->
+      <div class="scene-background" id="scene-bg"></div>
+
+      <!-- Personajes -->
+      <div class="characters-container">
+        <div class="character" id="juan-character">
+          <img id="juan-img" alt="Juan" />
+          <div class="character-name" id="juan-name">Juan</div>
+        </div>
+        <div class="character" id="user-character">
+          <img id="user-img" alt="Usuario" />
+          <div class="character-name" id="user-name">Sofía</div>
+        </div>
+        <div class="character" id="lia-character">
+          <img id="lia-img" alt="Lía la Luciérnaga" />
+          <div class="character-name" id="lia-name">Lía</div>
+        </div>
+      </div>
+
+      <!-- Diálogos -->
+      <div class="dialog-container">
+        <div class="dialog-header">
+          <div class="speaker-info">
+            <div class="speaker-icon">
+              <i class="fas fa-fairy" id="speaker-icon"></i>
+            </div>
+            <div class="speaker-name" id="speaker-name">Lía la Luciérnaga</div>
+          </div>
+          <div class="audio-indicator">
+            <i class="fas fa-volume-up"></i> Sonido activado
+          </div>
+        </div>
+        <div class="dialog-text" id="dialog-text">
+          <span class="dialog-text-container">
+            <span class="typing-animation"
+              >¡Hola! Estamos en el parque. Haz clic para comenzar la
+              aventura.</span
+            >
+          </span>
+        </div>
+        <div class="continue-prompt" id="continue-prompt">
+          <i class="fas fa-hand-point-up"></i> ¡Haz clic para continuar!
+        </div>
+        <div
+          class="options-container"
+          id="options-container"
+          style="display: none"
+        ></div>
+      </div>
+    </div>
+
+    <script src="js/gameConfig.js"></script>
+    <script src="js/audioManager.js"></script>
+    <script src="js/characterManager.js"></script>
+    <script src="js/sceneManager.js"></script>
+    <script src="js/uiManager.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const introScreen = document.getElementById("intro-screen");
+        const introForm = document.getElementById("intro-form");
+        const inputName = document.getElementById("input-name");
+        const parentPermission = document.getElementById("parent-permission");
+
+        // Si ya hay un nombre en gameConfig, ponlo en el input
+        if (window.gameConfig && window.gameConfig.userName) {
+          inputName.value = window.gameConfig.userName;
+        }
+
+        introForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (!inputName.value.trim() || !parentPermission.checked) return;
+          window._aventura_nombre = inputName.value.trim();
+          if (window.gameConfig)
+            window.gameConfig.userName = inputName.value.trim();
+          introScreen.style.display = "none";
+          document.getElementById("start-screen").style.display = "";
+        });
+      });
+    </script>
+    <script>
+      window.addEventListener("load", () => {
+        // Usar el nombre de la intro si existe
+        let name = window._aventura_nombre || gameConfig.userName;
+        if (window._aventura_nombre) {
+          gameConfig.userName = name;
+        }
+        document.querySelector("#user-character .character-name").textContent =
+          gameConfig.userName;
+        // ...existing code...
+      });
+      // ...existing code...
+    </script>
+  </body>
+</html>
