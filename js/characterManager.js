@@ -31,7 +31,23 @@ class CharacterManager {
 
   setCharacterImage(characterId, imagePath) {
     if (this.characterElements[characterId]) {
-      this.characterElements[characterId].image.src = imagePath;
+      const imgElem = this.characterElements[characterId].image;
+      console.log("elemento de imagen:", imgElem);
+      if (!imgElem) {
+        console.error(
+          `No se encontró el elemento de imagen para ${characterId}`
+        );
+        return;
+      }
+      if (!imagePath) {
+        console.error(
+          `No se encontró la imagen para ${characterId}:`,
+          imagePath
+        );
+        return;
+      }
+      console.log(`Setting image for ${characterId}: ${imagePath}`);
+      imgElem.setAttribute("src", imagePath);
     }
   }
 
@@ -82,8 +98,21 @@ class CharacterManager {
 
   setCharacterGender(characterId, gender) {
     if (characterId === "user") {
-      let imgSrc = resources.characters.user; // Por defecto
+      let imgSrc = resources.characters.userMasculino; // Por defecto
+      console.log(`Género del usuario: ${gender}`);
+      console.log(
+        `Recursos de personajes:`,
+        resources.characters.userMasculino
+      );
+
+      console.log(
+        `Imagen de usuario masculino: ${
+          gender === 1 && resources.characters.userMasculino
+        }`
+      );
+
       if (gender === 1 && resources.characters.userMasculino) {
+        console.log("Usando imagen masculina");
         imgSrc = resources.characters.userMasculino;
       } else if (gender === 2 && resources.characters.userFemenino) {
         imgSrc = resources.characters.userFemenino;

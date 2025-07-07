@@ -20,7 +20,10 @@ class UIManager {
 
   init() {
     // Configurar imágenes de vista previa
-    this.elements.previewUser.src = resources.characters.user;
+    this.elements.previewUser.src =
+      gameConfig.gender === 1
+        ? resources.characters.userMasculino
+        : resources.characters.userFemenino;
     this.elements.previewJuan.src = resources.characters.juan;
     this.elements.previewLia.src = resources.characters.lia;
 

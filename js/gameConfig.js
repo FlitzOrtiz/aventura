@@ -2,9 +2,9 @@
 const resources = {
   // Rutas de imágenes de fondo
   backgrounds: {
-    park: "assets/img/backgrounds/park.png",
+    park: "assets/img/backgrounds/park_close.png",
     parkClose: "assets/img/backgrounds/park_close.png",
-    end: "assets/img/backgrounds/sunset.jpg",
+    end: "assets/img/backgrounds/sunset.png",
   },
 
   // Rutas de audios
@@ -39,14 +39,14 @@ const resources = {
     juanHabla: "assets/img/characters/juan_habla_0.png",
     juanParado: "assets/img/characters/juan_parado_0.png",
     juanAdolorido: "assets/img/characters/juan_adolorido_0.png",
-    userMasculino: "assets/img/characters/user.png",
-    userMasculino: "assets/img/characters/user_pregunta.png",
-    userMasculino: "assets/img/characters/user_habla.png",
-    userMasculino: "assets/img/characters/user.png",
-    userFemenino: "assets/img/characters/user.png",
-    userFemenino: "assets/img/characters/user_pregunta.png",
-    userFemenino: "assets/img/characters/user_habla.png",
-    userFemenino: "assets/img/characters/user.png",
+    userMasculino: "assets/img/characters/user_male.png",
+    userMasculino: "assets/img/characters/user_pregunta_male.png",
+    userMasculino: "assets/img/characters/user_habla_male.png",
+    userMasculino: "assets/img/characters/user_male.png",
+    userFemenino: "assets/img/characters/user_female.png",
+    userFemenino: "assets/img/characters/user_pregunta_female.png",
+    userFemenino: "assets/img/characters/user_habla_female.png",
+    userFemenino: "assets/img/characters/user_female.png",
     lia: "assets/img/characters/Lia_parada_0.png",
     liaPregunta: "assets/img/characters/Lia_pregunta_0.png",
     liaHabla: "assets/img/characters/Lia_habla_0.png",
@@ -110,11 +110,13 @@ const scenesConfig = [
     dialogs: [
       {
         speaker: "Juan",
+        adolorido: true,
         text: "Me duele un poco, pero creo que estoy bien.",
         audio: resources.audios.juan_responde,
       },
       {
         speaker: "Lía la Luciérnaga",
+        adolorido: true,
         text: "Juan parece triste. ¿Cómo crees que se siente?",
         audio: resources.audios.lia_pregunta2,
         options: [
@@ -163,6 +165,7 @@ const scenesConfig = [
       },
       {
         speaker: "Juan",
+        adolorido: true,
         text: "Sí, por favor. ¿Puedes buscar a mi mamá que está aquí en el parque?",
         audio: resources.audios.juan_ayuda,
       },
@@ -256,6 +259,7 @@ const scenesConfig = [
 const gameConfig = {
   userName: "Tú",
   gender: 1,
+  points: 0,
 };
 
 // Estado del juego

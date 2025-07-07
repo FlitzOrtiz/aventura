@@ -178,6 +178,8 @@ class SceneManager {
     // Reproducir feedback de audio
     if (option.correct) {
       audioManager.play(resources.audios.correct);
+      gameConfig.points += 1;
+      actualizarPuntuacion(); // Llama a la función para actualizar la vista
     } else {
       audioManager.play(resources.audios.incorrect);
     }
@@ -186,6 +188,13 @@ class SceneManager {
     setTimeout(() => {
       this.nextDialog();
     }, 1500);
+  }
+}
+
+function actualizarPuntuacion() {
+  const scoreDiv = document.getElementById("score");
+  if (scoreDiv) {
+    scoreDiv.textContent = `Puntuación: ${gameConfig.points || 0}`;
   }
 }
 
